@@ -1,0 +1,28 @@
+project_name: dogaas-api
+project_slug: dogaas-api
+description: null
+requirements_file: requirements.txt
+bucket: null
+application_type: asgi
+entrypoint: main.app
+django_settings_module: null
+folder_id: b1gb7lhk0cksdbr6grv6
+gw_config: yappa_gw.yaml
+manage_function_name: null
+runtime: python38
+memory_limit: 128MB
+timeout: 1
+service_account_names:
+  creator: yappa-creator-account-default
+  function_actor: null
+excluded_paths:
+- venv
+- .git
+- .idea
+- .DS_Store
+- .yc
+environment: {}
+named_service_accounts: {}
+service_account_id: null
+is_public: true
+bucket_name: dogaas-api-5d202ed1
