@@ -1,10 +1,8 @@
 import logging
-import tempfile
 
 import uvicorn
 import requests
-from fastapi import FastAPI, Request
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, Request, Response
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -31,17 +29,13 @@ async def index(request: Request):
         image_url = response.get('message')
         logger.info('Загрузили картинку из dog.ceo')
         content = requests.get(image_url).content
-
-        with tempfile.NamedTemporaryFile(mode='wb', delete=False) as jpg:
-            jpg.write(content)
-            
-        return FileResponse(jpg.name, media_type='image/jpeg')
-
+        return Response(content=content, media_type='image/jpeg')
     except Exception as error:
         message = f'Сбой в работе программы: {error}'
         logger.error(message)
         return {'error': message}
 
+
 if __name__ == '__main__':
-    uvicorn.run('main:app', host='127.0.0.1', port=8000, log_level='info',
+    uvicorn.run('main:app', host='127.0.0.1', port=8001, log_level='info',
                 reload=True)
